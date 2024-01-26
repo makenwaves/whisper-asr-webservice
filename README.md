@@ -27,6 +27,11 @@ docker run -d -p 9000:9000 -e ASR_MODEL=base -e ASR_ENGINE=openai_whisper onerah
 docker run -d --gpus all -p 9000:9000 -e ASR_MODEL=base -e ASR_ENGINE=openai_whisper onerahmet/openai-whisper-asr-webservice:latest-gpu
 ```
 
+### Rocm
+```sh
+sudo docker run -d -v /opt/rocm:/opt/rocm --device=/dev/kfd --device=/dev/dri --group-add video -p 9000:9000 -e ASR_MODEL=base -e ASR_ENGINE=openai_whisper <Built Image Tag>
+```
+
 for more information:
 
 - [Documentation/Run](https://ahmetoner.github.io/whisper-asr-webservice/run)
