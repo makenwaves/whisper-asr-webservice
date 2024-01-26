@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  whisper-asr-webservice-rocm:
+    build:
+      context: .
+      dockerfile: Dockerfile.rocm
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    environment:
+      - LD_LIBRARY_PATH=/opt/rocm/lib
+      - ASR_MODEL=base
+    group_add:
+      - video
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./app:/app/app
+      - /opt/rocm:/opt/rocm
+      - cache-pip:/root/.cache/pip
+      - cache-poetry:/root/.cache/poetry
+      - cache-whisper:/root/.cache/whisper
+
+volumes:
+  cache-pip:
+  cache-poetry:
+  cache-whisper:
+  cache-faster-whisper:
